@@ -1,0 +1,50 @@
+use exercicio;
+create table [Aluno] (
+	Matricula int not null 
+	,NomeAluno varchar(100) not null
+	,CPF char(11) not null
+	,DataNcto smalldatetime not null
+	,Mensalidade numeric (6,2) not null
+	,constraint PK_ALUNO primary key (Matricula)
+	,constraint	UN_ALUNO unique (NomeAluno, CPF)
+	);
+	drop table aluno;
+
+INSERT ALUNO VALUES (123,'José da Silva','12345678900','19911121', 1000,
+'ADS3')
+INSERT into aluno VALUES ('Maria da Silva', '12345678911','20000317',
+1000, 'ADS1')
+INSERT aluno VALUES ('Ana da Silva', '12345678922','20000317', 1000,
+'ADS3')
+
+
+
+
+
+declare @total int;
+declare @msg varchar 100;
+
+set @total = (select count(*) from aluno);
+
+if @total > 5
+	begin
+		set @msg = 'Mais que 5 alunos'
+		print(@msg)
+	end
+else
+	begin
+		set @msg = 'Menos que 5 alunos'
+		print(@msg)
+	end;
+
+
+
+
+
+declare @x int;
+
+set @x = (select Mensalidade from aluno where Mensalidade > 1000);
+
+if @x > 1000
+	begin
+		update aluno set mensalidade > 1000 where
